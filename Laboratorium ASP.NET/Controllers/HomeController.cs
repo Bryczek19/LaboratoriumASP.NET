@@ -24,7 +24,7 @@ public class HomeController : Controller
     }
     public enum Operator
     {
-        Add, Sub, Mul, Div
+     addd 
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
