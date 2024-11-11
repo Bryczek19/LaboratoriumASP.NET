@@ -6,17 +6,17 @@ namespace Laboratorium_ASP.NET.Controllers;
 
 public class ContactController : Controller
 {
-    private iContactService _contactService;
-
-    public ContactController(iContactService contactService)
+    static private Dictionary<int, ContactModel> _contacts= new Dictionary<int, ContactModel>()
     {
-        _contactService = contactService;
-    }
+        {1, new() {Id = 1, Email = "email@wsei.com",FirstName = "Adam", LastName = "rafał", BirthDate = new DateTime(1930, 1,09), PhoneNumber = "111 111 111"}},
+        {2, new() {Id = 2, Email = "email1@wsei.com",FirstName = "Karol", LastName = "Kowal", BirthDate = new DateTime(1990, 03,13), PhoneNumber = "222 222 222"}}
+    };
 
+    private static int currentID = 0;
     // Lista kontaktów
     public IActionResult Index()
     {
-        return View(_contactService.GetAll());
+        return View(_contacts);
     }
 
     public ActionResult Add()
@@ -31,35 +31,20 @@ public class ContactController : Controller
         {
             return View(model);
         }
-        _contactService.Add(model);
-        
-        return View(model);
+
+        model.Id = ++currentID;
+        _contacts.Add(model.Id, model);
+        return View("Index", _contacts);
     }
 
     public ActionResult Delete(int id)
     {
-        _contactService.Delete(id);
-        return RedirectToAction(nameof(System.Index));
+        _contacts.Remove(id);
+        return View("Index", _contacts);
     }
 
     public ActionResult Details(int id)
     {
-        return View(_contactService.GetById(id));
+        return View(_contacts[id]);
     }
-
-    public ActionResult Edit(int id)
-    {
-        return View(_contactService.GetById(id));
-    }
-    [HttpPost]
-    public ActionResult Edit(ContactModel model)
-    {
-        if (!ModelState.IsValid)
-        {
-            return View();            
-            
-        }           
-        _contactService.Update(model);          
-        return RedirectToAction(nameof(System.Index));
-    }  
 }
