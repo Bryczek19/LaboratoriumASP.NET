@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddTransient<iContactService, EFContactService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

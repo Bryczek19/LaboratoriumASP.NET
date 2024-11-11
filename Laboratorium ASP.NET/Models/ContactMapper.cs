@@ -7,12 +7,12 @@ public class ContactMapper
         return new ContactModel()
         {
             Id = entity.Id,
-            FirstName = entity.LastName,
+            FirstName = entity.FirstName,
             LastName = entity.LastName,
             BirthDate = entity.BirthDate,
             PhoneNumber = entity.PhoneNumber,
             Email = entity.Email,
-            // dodaj mapowanie do Category
+            Category = entity.Category,
         };
     }
 
@@ -21,11 +21,17 @@ public class ContactMapper
         return new ContactEntity()
         {
             Id = model.Id,
-            FirstName = model.LastName,
+            FirstName = model.FirstName,
+            LastName = model.LastName,
             BirthDate = model.BirthDate,
             PhoneNumber = model.PhoneNumber,
             Email = model.Email,
-         // dodaj mapowanie
+            Category = model.Category,
         };
     }
 }
+
+
+
+// dodaj mapowanie do Category
+// dodaj mapowanie
