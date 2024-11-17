@@ -7,4 +7,5 @@ public interface iContactService
     void Delete(int id);
     List<ContactModel> GetAll();
     ContactModel? GetById(int id);
+    object FindAllOrganizations();
 }

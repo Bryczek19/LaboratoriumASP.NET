@@ -40,4 +40,9 @@ public class MemoryContactService: iContactService
         // return _contacts.TryGetValue(id, out var contact) ? contact : null;
         return _contacts[id];
     }
+
+    public object FindAllOrganizations()
+    {
+        throw new NotImplementedException();
+    }
 }

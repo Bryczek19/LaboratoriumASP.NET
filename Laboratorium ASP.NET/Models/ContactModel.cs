@@ -32,4 +32,6 @@ public class ContactModel
     public DateTime BirthDate { get; set; }
     [Display(Name = "Kategoria")]
     public  Category Category { get; set; }
+
+    public object Organizations { get; set; }
 }
