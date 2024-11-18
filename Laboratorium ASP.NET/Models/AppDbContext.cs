@@ -52,6 +52,7 @@ public class AppDbContext:DbContext
         );
         
         
+        
         modelBuilder.Entity<ContactModel>().HasData(
             new ContactEntity()
             {
