@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace Laboratorium_ASP.NET.Models;
@@ -26,6 +27,7 @@ public class AppDbContext:DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<OrganizationEntity>().OwnsOne(o => o.Address).HasData(
             new {OrganizationEntityId = 1, City = "Kraków", Street = "św. Filipa"},
             new {OrganizationEntityId = 2, City = "Warszawa", Street = "Wesoła"}
@@ -33,6 +35,7 @@ public class AppDbContext:DbContext
 
         modelBuilder.Entity<ContactEntity>().HasOne<OrganizationEntity>(c => c.Organizations).WithMany(o => o.Contacts)
             .HasForeignKey(o => o.OrganizationId);
+        
 
         modelBuilder.Entity<OrganizationEntity>().HasData(
             new OrganizationEntity()
@@ -77,6 +80,48 @@ public class AppDbContext:DbContext
                 OrganizationId = 2
             }
         );
+
+        string adminId;
+        var admin = new IdentityUser()
+        {
+          Id= adminId,
+          UserName = "Adam",
+          NormalizedUserName = "ADAM",
+          Email = "adam@wsei.edu.pl",
+          NormalizedEmail = "ADAM@WSEI.EDU.PL",
+          EmailConfirmed = true
+
+        };
+        var user = new IdentityUser()
+        {
+            Id= USER_ID,
+            UserName = "Ewa",
+            NormalizedUserName = "EWA",
+            Email = "ewa@wsei.edu.pl",
+            NormalizedEmail = "EWA@WSEI.EDU.PL",
+            EmailConfirmed = true
+            
+        };
+        PasswordHasher<IdentityUser> hasher = new PasswordHasher<IdentityUser>();
+        admin.PasswordHash = hasher.HashPassword(admin, password: "1234!");
+        user.PasswordHash = hasher.HashPassword(user, password: "abcd!");
+
+        modelBuilder.Entity<IdentityUser>()
+            .HasData(admin, user);
+        modelBuilder.Entity<IdentityUserRole<string>>()
+            .HasData(
+                new IdentityUserRole<string>()
+                {
+                    RoleId = adminId
+                    UserID = ADMIN_ID
+                },
+                new IdentityUserRole<string>()
+                {
+                    RoleId = USER_ID
+                    USER_ID = USER_ID
+                }
+            );
+
     }
 }
 
@@ -89,6 +134,7 @@ public class OrganizationEntity
         Nip = nip;
         Name = name;
     }
+    
 
     public OrganizationEntity()
     {

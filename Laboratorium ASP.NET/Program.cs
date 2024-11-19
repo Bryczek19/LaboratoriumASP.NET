@@ -1,13 +1,19 @@
 using Laboratorium_ASP.NET.Models;
 using Laboratorium_ASP.NET.Models.Services;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>();
+    .AddRoles < IdentityRole < ()
+    .AddEntityFrameworkStores<AppDbContext>();
 builder.Services.AddTransient<iContactService, EFContactService>();
-
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
