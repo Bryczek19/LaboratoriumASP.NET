@@ -19,6 +19,7 @@ public class AppDbContext:DbContext
         var path = Environment.GetFolderPath(folder);
         DbPath = System.IO.Path.Join(path);
     }
+    
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -81,46 +82,69 @@ public class AppDbContext:DbContext
             }
         );
 
-        string adminId;
+        string ADMIN_ID = Guid.NewGuid().ToString();
+        string ADMIN_ROLE_ID = Guid.NewGuid().ToString();
+        string USER_ID = Guid.NewGuid().ToString();
+        string USER_ROLE_ID = Guid.NewGuid().ToString();
+
+        modelBuilder.Entity<IdentityRole>()
+            .HasData
+            (
+                new IdentityRole()
+                {
+                    Id = ADMIN_ROLE_ID,
+                    Name = "admin",
+                    NormalizedName = "ADMIN",
+                    ConcurrencyStamp = ADMIN_ROLE_ID
+                },
+                new IdentityRole()
+                {
+                    Id = USER_ROLE_ID,
+                    Name = "user",
+                    NormalizedName = "USER",
+                    ConcurrencyStamp = USER_ROLE_ID
+                }
+            );
+
         var admin = new IdentityUser()
         {
-          Id= adminId,
-          UserName = "Adam",
-          NormalizedUserName = "ADAM",
-          Email = "adam@wsei.edu.pl",
-          NormalizedEmail = "ADAM@WSEI.EDU.PL",
-          EmailConfirmed = true
-
+            Id = ADMIN_ID,
+            Email = "admin@gmail.com",
+            NormalizedEmail = "admin@gmail.com".ToUpper(),
+            UserName = "admin",
+            NormalizedUserName = "admin".ToUpper(),
+            EmailConfirmed = true,
         };
+        
         var user = new IdentityUser()
         {
-            Id= USER_ID,
-            UserName = "Ewa",
-            NormalizedUserName = "EWA",
-            Email = "ewa@wsei.edu.pl",
-            NormalizedEmail = "EWA@WSEI.EDU.PL",
-            EmailConfirmed = true
-            
+            Id = USER_ID,
+            Email = "kamil@gmail.com",
+            NormalizedEmail = "kamil@gmail.com".ToUpper(),
+            UserName = "user",
+            NormalizedUserName = "user".ToUpper(),
+            EmailConfirmed = true,
         };
+
         PasswordHasher<IdentityUser> hasher = new PasswordHasher<IdentityUser>();
-        admin.PasswordHash = hasher.HashPassword(admin, password: "1234!");
-        user.PasswordHash = hasher.HashPassword(user, password: "abcd!");
+        admin.PasswordHash = hasher.HashPassword(admin, "1234!");
+        user.PasswordHash = hasher.HashPassword(user, "4321!");
 
         modelBuilder.Entity<IdentityUser>()
             .HasData(admin, user);
         modelBuilder.Entity<IdentityUserRole<string>>()
             .HasData(
                 new IdentityUserRole<string>()
-                {
-                    RoleId = adminId
-                    UserID = ADMIN_ID
-                },
+        {
+            RoleId = ADMIN_ROLE_ID,
+            UserId = admin.Id
+        },
                 new IdentityUserRole<string>()
                 {
-                    RoleId = USER_ID
-                    USER_ID = USER_ID
+                    RoleId = USER_ROLE_ID,
+                    UserId = user.Id
                 }
-            );
+        );
 
     }
 }
@@ -147,4 +171,6 @@ public class OrganizationEntity
     public string Nip { get; set; }
     public string Name { get; set; }
     public object Address { get; set; }
+    public string NIP { get; set; }
+    public string REGON { get; set; }
 }

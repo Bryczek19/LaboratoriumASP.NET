@@ -5,11 +5,13 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>Laboratorium_ASP.NET</RootNamespace>
+        <UserSecretsId>c9290e26-8a34-4ce5-bd68-392e42c72450</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="EntityFrameworkCore.RepositoryInfrastructure" Version="8.0.10" />
       <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.10" />
+      <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.11" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
         <PrivateAssets>all</PrivateAssets>
@@ -17,6 +19,13 @@
       </PackageReference>
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.10" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="8.0.10" />
+      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Views\Birth\" />
+      <Folder Include="Views\Calculator\" />
+      <Folder Include="Views\Organization\" />
     </ItemGroup>
 
 </Project>

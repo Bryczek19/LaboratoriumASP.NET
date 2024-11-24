@@ -8,9 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<AppDbContext>();
-builder.Services.AddDefaultIdentity<IdentityUser>();
-    .AddRoles < IdentityRole < ()
-    .AddEntityFrameworkStores<AppDbContext>();
 builder.Services.AddTransient<iContactService, EFContactService>();
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();

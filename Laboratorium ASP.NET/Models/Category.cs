@@ -4,10 +4,10 @@ namespace Laboratorium_ASP.NET.Models;
 
 public enum Category
 {
-    [Display(Name = "Rodzina")]
-    Family = 1,
-    [Display(Name = "Znajomy")]
-    Friend = 2,
-    [Display(Name = "Kontakt zawodowy")]
-    Business = 4,
+    [Display(Name="Rodzina ", Order = 1)]
+    Family,
+    [Display(Name="Znajomi", Order = 3)]
+    Friend,
+    [Display(Name="Kontakty zawodowe", Order = 2)]
+    Business,
 }

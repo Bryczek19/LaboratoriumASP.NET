@@ -11,22 +11,274 @@ namespace LaboratoriumASP.NET.Migrations
     partial class Organizations
     {
         /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.10");
 
-            modelBuilder.Entity("WebApplication1.Models.ContactEntity", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex");
+
+                    b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "9e358001-8ba7-48a1-abba-e5cbda0d9603",
+                            ConcurrencyStamp = "9e358001-8ba7-48a1-abba-e5cbda0d9603",
+                            Name = "admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "8e741076-0a3a-4286-afa1-a2c8e6959e27",
+                            ConcurrencyStamp = "8e741076-0a3a-4286-afa1-a2c8e6959e27",
+                            Name = "user",
+                            NormalizedName = "USER"
+                        });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<string>("ClaimType")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Category")
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("AccessFailedCount")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "a5872f81-9a91-48be-997c-10e29795662b",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ce2f4619-33b5-49b3-b49c-d4041aa3ba76",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBNwP4md5y2Rhx12eciOp78F0OOpvgAOd0C7ovw1mpUQ9lopQh7rKd8S3O8UCLOy0A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "75e3595c-f2ff-4b52-9f97-c07e87ea7d42",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = "e672f0eb-4048-479c-89e0-d120983767ad",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "77ee902a-b83a-43d1-8ead-546ba1348f01",
+                            Email = "kamil@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "KAMIL@GMAIL.COM",
+                            NormalizedUserName = "USER",
+                            PasswordHash = "AQAAAAIAAYagAAAAEH1pMrdfhqPwv03y4NRuBh16mAmu0zlxCeGiRL8bOBqM1xbrUieFEFlaTcIHW9F+og==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "0e027130-5fd5-4538-8f52-5f19f03873e0",
+                            TwoFactorEnabled = false,
+                            UserName = "user"
+                        });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "a5872f81-9a91-48be-997c-10e29795662b",
+                            RoleId = "9e358001-8ba7-48a1-abba-e5cbda0d9603"
+                        },
+                        new
+                        {
+                            UserId = "e672f0eb-4048-479c-89e0-d120983767ad",
+                            RoleId = "8e741076-0a3a-4286-afa1-a2c8e6959e27"
+                        });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("WebApp.Models.ContactEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("BirthDate")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("birth");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
@@ -50,7 +302,6 @@ namespace LaboratoriumASP.NET.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasMaxLength(12)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -63,71 +314,120 @@ namespace LaboratoriumASP.NET.Migrations
                         new
                         {
                             Id = 1,
-                            BirthDate = new DateTime(2000, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Category = 0,
-                            Created = new DateTime(2024, 11, 12, 12, 15, 56, 356, DateTimeKind.Local).AddTicks(7364),
-                            Email = "adam@.wsei.edu.pl",
-                            FirstName = "Adam",
-                            LastName = "Nowak",
-                            OrganizationId = 1,
-                            PhoneNumber = "333 333 333"
+                            BirthDate = new DateOnly(2003, 11, 10),
+                            Created = new DateTime(2024, 11, 19, 17, 27, 13, 954, DateTimeKind.Local).AddTicks(7370),
+                            Email = "kacper@gmail.com",
+                            FirstName = "Kacper",
+                            LastName = "Dąbrowski",
+                            OrganizationId = 101,
+                            PhoneNumber = "888123188"
                         },
                         new
                         {
                             Id = 2,
-                            BirthDate = new DateTime(2000, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Category = 0,
-                            Created = new DateTime(2024, 11, 12, 12, 15, 56, 356, DateTimeKind.Local).AddTicks(7419),
-                            Email = "ada@.wsei.edu.pl",
-                            FirstName = "Ada",
-                            LastName = "Fisak",
-                            OrganizationId = 2,
-                            PhoneNumber = "333 333 333"
+                            BirthDate = new DateOnly(2002, 8, 21),
+                            Created = new DateTime(2024, 11, 19, 17, 27, 13, 954, DateTimeKind.Local).AddTicks(7426),
+                            Email = "jan@gmail.com",
+                            FirstName = "Jan",
+                            LastName = "Kowalski",
+                            OrganizationId = 101,
+                            PhoneNumber = "111999777"
                         });
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.OrganizationEntity", b =>
+            modelBuilder.Entity("WebApp.Models.OrganizationEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("NIP")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Nip")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Regon")
+                    b.Property<string>("REGON")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("organizations");
+                    b.ToTable("organizations", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = 101,
+                            NIP = "8432443",
                             Name = "WSEI",
-                            Nip = "1234567890",
-                            Regon = "73276"
+                            REGON = "73217313"
                         },
                         new
                         {
-                            Id = 2,
-                            Name = "POLIBUDA",
-                            Nip = "1234567894210",
-                            Regon = "7322134"
+                            Id = 102,
+                            NIP = "3213133",
+                            Name = "ORLEN",
+                            REGON = "3414314"
                         });
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.ContactEntity", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("WebApplication1.Models.OrganizationEntity", "Organization")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApp.Models.ContactEntity", b =>
+                {
+                    b.HasOne("WebApp.Models.OrganizationEntity", "Organization")
                         .WithMany("Contacts")
                         .HasForeignKey("OrganizationId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -136,9 +436,9 @@ namespace LaboratoriumASP.NET.Migrations
                     b.Navigation("Organization");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.OrganizationEntity", b =>
+            modelBuilder.Entity("WebApp.Models.OrganizationEntity", b =>
                 {
-                    b.OwnsOne("WebApplication1.Models.Address", "Address", b1 =>
+                    b.OwnsOne("WebApp.Models.Address", "Address", b1 =>
                         {
                             b1.Property<int>("OrganizationEntityId")
                                 .HasColumnType("INTEGER");
@@ -161,22 +461,23 @@ namespace LaboratoriumASP.NET.Migrations
                             b1.HasData(
                                 new
                                 {
-                                    OrganizationEntityId = 1,
+                                    OrganizationEntityId = 101,
                                     City = "Kraków",
-                                    Street = "Długa 1"
+                                    Street = "św. Filipa 12"
                                 },
                                 new
                                 {
-                                    OrganizationEntityId = 2,
-                                    City = "Kraków",
-                                    Street = "Osiedle Zgody 3"
+                                    OrganizationEntityId = 102,
+                                    City = "Wrocław",
+                                    Street = "św. Filipa 15"
                                 });
                         });
 
-                    b.Navigation("Address");
+                    b.Navigation("Address")
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.OrganizationEntity", b =>
+            modelBuilder.Entity("WebApp.Models.OrganizationEntity", b =>
                 {
                     b.Navigation("Contacts");
                 });
