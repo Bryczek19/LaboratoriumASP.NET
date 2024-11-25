@@ -12,7 +12,7 @@ public class OrganizationMapper
             Name = model.Name,
             NIP = model.NIP,
             REGON = model.REGON,
-            Address = new Address
+            Address = new Services.Address
             {
                 City = model.Address?.City,
                 Street = model.Address?.Street

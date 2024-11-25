@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Laboratorium_ASP.NET.Models.Services;
 
 namespace Laboratorium_ASP.NET.Models;
 [Table(name:"contacts")]

@@ -215,7 +215,7 @@ namespace LaboratoriumASP.NET.Migrations
 
             migrationBuilder.InsertData(
                 table: "organizations",
-                columns: new[] { "Id", "Address_City", "Address_Street", "NIP", "Name", "REGON" },
+                columns: new[] { "Id", "Address_City", "Address_Street", "Nip", "Name", "REGON" },
                 values: new object[,]
                 {
                     { 101, "Kraków", "św. Filipa 12", "8432443", "WSEI", "73217313" },
